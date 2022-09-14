@@ -22,10 +22,10 @@ fetch("./texts.json")
 // checks the user typed character and displays accordingly
 const typeController = (e) => {
   const newLetter = e.key;
-
+  // "Backspace"
   // Handle backspace press
   if (newLetter == "Backspace") {
-    userText = userText.slice(0, userText.length - 1);
+    userText = userText.slice(0, userText.length -1);
     return display.removeChild(display.lastChild);
   }
 
@@ -45,7 +45,8 @@ const typeController = (e) => {
   if (newLetterCorrect) {
     display.innerHTML += `<span class="green">${newLetter === " " ? "▪" : newLetter}</span>`;
   } else {
-    display.innerHTML += `<span class="red">${newLetter === " " ? "▪" : newLetter}</span>`;
+    display.innerHTML += `<span class="red">${newLetter === " " ? "▪" : errorCount++}</span>`;
+
   }
 
   // check if given question text is equal to user typed text
@@ -57,6 +58,7 @@ const typeController = (e) => {
 const validate = (key) => {
   if (key === questionText[userText.length - 1]) {
     return true;
+  
   }
   return false;
 };
@@ -68,7 +70,6 @@ const gameOver = () => {
   // so total time taken is current time - start time
   const finishTime = new Date().getTime();
   const timeTaken = (finishTime - startTime) / 1000; 
-
   // show result modal
   resultModal.innerHTML = "";
   resultModal.classList.toggle("hidden");
